@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propose to Me</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .header {
+            text-align: center;
+        }
+        
+        .title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .description {
+            color: #4a5568;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        textarea {
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        button {
+            padding: 1rem 2rem;
+            background: #4a5568;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        button:hover {
+            background: #2d3748;
+        }
+        
+        #response {
+            background: rgba(255,255,255,0.9);
+            padding: 2rem;
+            border-radius: 1rem;
+            min-height: 100px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .loading {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        /* Add styles for markdown content */
+        .response-text {
+            line-height: 1.6;
+        }
+
+        .response-text h1,
+        .response-text h2,
+        .response-text h3,
+        .response-text h4,
+        .response-text h5,
+        .response-text h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #2d3748;
+        }
+
+        .response-text p {
+            margin: 1em 0;
+        }
+
+        .response-text code {
+            background: #f1f5f9;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .response-text pre {
+            background: #f1f5f9;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .response-text pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .response-text ul,
+        .response-text ol {
+            margin: 1em 0;
+            padding-left: 2em;
+        }
+
+        .response-text blockquote {
+            border-left: 4px solid #cbd5e0;
+            margin: 1em 0;
+            padding-left: 1em;
+            color: #4a5568;
+        }
+
+        .response-text a {
+            color: #4299e1;
+            text-decoration: none;
+        }
+
+        .response-text a:hover {
+            text-decoration: underline;
+        }
+
+        .response-text table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+
+        .response-text th,
+        .response-text td {
+            border: 1px solid #cbd5e0;
+            padding: 0.5em;
+            text-align: left;
+        }
+
+        .response-text th {
+            background: #f1f5f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Propose To Me</h1>
+            <p class="description">
+                Welcome to Propose To Me! Our AI is here to help you plan the best possible outcome for that special day. Feel free to ask us anything!            </p>
+        </div>
+        
+        <form class="input-container" hx-post="/api/ask" hx-target="#response">
+            <textarea  
+                name="prompt" 
+                placeholder="Tell us about your partner..."
+                required></textarea>
+                
+            <button type="submit">
+                Send Message
+            </button>
+        </form>
+        
+        <div id="response">
+            <!-- Response will appear here -->
+        </div>
+    </div>
+</body>
+</html>
